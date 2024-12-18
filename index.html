@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale = 1.0 , user-scalable = 0"">
+
+  <link rel=" stylesheet" href="css/style.css">
+	<!-- +подкл библиотеку  swiper-->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+	<!-- AOS -->
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+
+	<title>Document</title>
+
+
+</head>
+
+<body>
+	<div class="wrapper">
+
+		<div class="header" id="head">
+			<div class="header__container ">
+
+				<div class="header__burger">
+					<span></span>
+				</div>
+
+				<img class="header__photo" src="./header/лого.svg">
+
+				<nav class="header__menu">
+
+					<ul class="header__list">
+						<li><a href="#">Головна</a></li>
+						<li><a href="#catalog">Каталог</a></li>
+						<li><a href="#qual">Про нас</a></li>
+						<li><a href="#ord">Як замовити</a></li>
+						<li><a href="#client">Відгуки</a></li>
+						<li><a href="#footer">Контакти </a></li>
+						<li><img src="./icons/korz.png"></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<div class="main">
+			<div class="hero">
+
+				<div class="hero__container">
+					<div class="hero__box">
+						<span> Неймовірні </span>
+						<div class="hero__title">
+							<h1> Букети </h1>
+							<span>зі свіжих квітів</span>
+						</div>
+						<p class="delivery">З доставкою по Харкову протягом 1 години</p>
+						<button class="hero__botton">
+							<p><a href="#ord">ЗАМОВИТИ КВІТИ</a></p>
+						</button>
+					</div>
+
+
+					<div class="hero__list">
+						<ul>
+							<li><img src="./main-hero/rose.png" alt="#">
+								<p>Щоденне оновлення свіжих <br> квітів</p>
+							</li>
+							<li><img src="./main-hero/geo.png" alt="#">
+								<p>Безкоштовна доставка в будь<br> яку точку міста</p>
+							</li>
+							<li><img src="./main-hero/globo.png " alt="#">
+								<p>Більше 1000 сортів квітів з<br> усього світу</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="catalog" id="catalog">
+				<div class="catalog__link link--left" data-aos="fade-right" data-aos-duration="1000">
+					<p data-aos="fade-right" data-aos-duration="1500">Каталог </p>
+				</div>
+
+				<div class="catalog__container subcontainer">
+					<div class="catalog__title">
+						<p>Доставка квітів в Харкові</p>
+					</div>
+					<div class="catalog__nav">
+						<div class="dropdown">
+							<button class="dropbtn">Ціна ...</button>
+							<div class="dropdown-content">
+
+								<form id="price-form">
+									<div class="inp"> <input type="checkbox" id="200" name="price" value="до 200 $">
+										<label for="200">до 200 $</label>
+									</div>
+									<div class="inp"> <input type="checkbox" id="500" name="price"
+											value="200 $ - 500 $"> <label for="500">200 $ - 500 $
+										</label> </div>
+									<div class="inp"> <input type="checkbox" id="1000" name="price" value="1000 $">
+										<label for="1000">1000 $</label>
+									</div>
+									<button name="submit" value="Применить 2">
+										<p class="bef">Застосувати</p>
+										<p class="aft">Вже в корзині</p>
+									</button>
+								</form>
+
+							</div>
+						</div>
+						<div class="dropdown">
+							<button class="dropbtn">Квіти ...</button>
+							<div class="dropdown-content">
+								<form id="flower-form">
+									<div class="inp"><input type="checkbox" id="tr" name="flower" value="Троянда">
+										<label for="tr">Троянда</label>
+									</div>
+									<div class="inp"><input type="checkbox" id="eu" name="flower" value="Еустом"> <label
+											for="eu">Еустом</label>
+									</div>
+									<div class="inp"><input type="checkbox" id="hr" name="flower" value="Хризантема">
+										<label for="hr">Хризантема</label>
+									</div>
+									<div class="inp"><input type="checkbox" id="tu" name="flower" value="Тюльпан">
+										<label for="tu">Тюльпан</label>
+									</div>
+									<div class="inp"><input type="checkbox" id="go" name="flower" value="Гортензія">
+										<label for="go">Гортензія</label>
+									</div>
+									<div class="inp"><input type="checkbox" id="al" name="flower" value="Альстромерія">
+										<label for="al">Альстромерія</label>
+									</div>
+									<button name="submit" value="Применить 2">
+										<p class="bef">Застосувати</p>
+										<p class="aft">Вже в корзині</p>
+									</button>
+								</form>
+							</div>
+						</div>
+						<div class="dropdown">
+							<button class="dropbtn">Кому ...</button>
+							<div class="dropdown-content">
+								<form id="people-form">
+									<div class="inp"> <input type="checkbox" id="women" name="people" value="Жінці">
+										<label for="women">Жінці</label>
+									</div>
+									<div class="inp"> <input type="checkbox" id="men" name="people" value="Чоловіку">
+										<label for="men">Чоловіку</label>
+									</div>
+									<button name="submit" value="Применить 2" form="myForm" formaction="/submit"
+										formmethod="post">
+										<p class="bef">Застосувати</p>
+										<p class="aft">Вже в корзині</p>
+									</button>
+								</form>
+
+							</div>
+						</div>
+						<div class="dropdown">
+							<button class="dropbtn">Привід...
+							</button>
+							<div class="dropdown-content">
+								<form id="move-form">
+									<div class="inp"><input type="checkbox" id="dn" name="move" value="День
+											народження"> <label for="dn">День
+											народження</label>
+									</div>
+									<div class="inp"><input type="checkbox" id="we" name="move" value="Весілля">
+										<label for="we">Весілля</label>
+									</div>
+									<div class="inp"><input type="checkbox" id="ko" name="move" value="Кохання">
+										<label for="ko">Кохання</label>
+									</div>
+									<div class="inp"><input type="checkbox" id="sp" name="move" value="Співчуваю">
+										<label for="sp">Співчуваю</label>
+									</div>
+									<button name="submit" value="Применить 2" form="myForm" formaction="/submit"
+										formmethod="post">
+										<p class="bef">Застосувати</p>
+										<p class="aft">Вже в корзині</p>
+									</button>
+								</form>
+
+							</div>
+						</div>
+						<div class="dropdown">
+							<button class="dropbtn">Стиль ...</button>
+							<div class="dropdown-content">
+								<form id="style-form">
+									<div class="inp"> <input type="checkbox" id="vi" name="style" value="Вільний">
+										<label for="vi">Вільний</label>
+									</div>
+									<div class="inp"> <input type="checkbox" id="krk" name="style" value="Каркаснийя">
+										<label for="krk">Каркасний</label>
+									</div>
+									<div class="inp"> <input type="checkbox" id="kor" name="style" value="В
+											коробці">
+										<label for="kor">В
+											коробці</label>
+									</div>
+									<div class="inp"> <input type="checkbox" id="kow" name="style" value="В кошику">
+										<label for="kow">В кошику</label>
+									</div>
+									<div class="inp"> <input type="checkbox" id="ka" name="style" value="Каскадний">
+										<label for="ka">Каскадний</label>
+									</div>
+									<button name="submit" value="Применить 2" form="myForm" formaction="/submit"
+										formmethod="post">
+										<p class="bef">Застосувати</p>
+										<p class="aft">Вже в корзині</p>
+									</button>
+								</form>
+
+							</div>
+						</div>
+
+					</div>
+					<img src="./icons/korz.png">
+				</div>
+
+				<div class="galery">
+					<div class="galery__container subcontainer">
+						<div class="galery__title">
+							<p>Хіт продажів</p>
+						</div>
+
+
+						<div class="galery__slidebox ">
+							<div class="slidebox__card ">
+								<div class="slidebox__card--heart"><img src="./flowers/heart.png"></div>
+								<div class="slidebox__card--img"><img src="./flowers/1.png"></div>
+								<div class="slidebox__card--price">
+									<p>500 ₴
+									</p>
+								</div>
+								<div class="slidebox__card--flower"><span>Мінібукет 1400-2</span></div>
+								<div class="slidebox__card--hov">
+									<div class="hovers">
+										<p>Хрезантема - 6 шт. (50 см.), </p>
+										<p>Троянда міні - 4 шт., </p>
+									</div>
+									<button>Замовити</button>
+								</div>
+							</div>
+							<div class="slidebox__card">
+								<div class="slidebox__card--heart"><img src="./flowers/heart.png"></div>
+								<div class="slidebox__card--img"><img src="./flowers/2.png"></div>
+								<div class="slidebox__card--price">
+									<p>800 ₴
+									</p>
+								</div>
+								<div class="slidebox__card--flower"><span>Мінібукет 1600-6</span></div>
+								<div class="slidebox__card--hov">
+									<div class="hovers">
+										<p>Хрезантема - 6 шт. (50 см.), </p>
+										<p>Троянда міні - 4 шт., </p>
+									</div>
+									<button>Замовити</button>
+								</div>
+							</div>
+							<div class="slidebox__card ">
+								<div class="slidebox__card--heart"><img src="./flowers/heart.png"></div>
+								<div class="slidebox__card--img"><img src="./flowers/3.png"></div>
+								<div class="slidebox__card--price">
+									<p>1000 ₴
+									</p>
+								</div>
+								<div class="slidebox__card--flower"><span>Троянда Freedom 51 шт</span></div>
+								<div class="slidebox__card--hov">
+									<div class="hovers">
+										<p>Хрезантема - 6 шт. (50 см.), </p>
+										<p>Троянда міні - 4 шт., </p>
+									</div>
+									<button>Замовити</button>
+								</div>
+							</div>
+							<div class="slidebox__card">
+								<div class="slidebox__card--heart"><img src="./flowers/heart.png"></div>
+								<div class="slidebox__card--img"><img src="./flowers/4.png"></div>
+								<div class="slidebox__card--price">
+									<p>680 ₴
+									</p>
+								</div>
+								<div class="slidebox__card--flower"><span>Мінібукет 1400-3</span></div>
+								<div class="slidebox__card--hov">
+									<div class="hovers">
+										<p>Хрезантема - 6 шт. (50 см.), </p>
+										<p>Троянда міні - 4 шт., </p>
+									</div>
+									<button>Замовити</button>
+								</div>
+							</div>
+							<div class="slidebox__card">
+								<div class="slidebox__card--heart"><img src="./flowers/heart.png"></div>
+								<div class="slidebox__card--img"><img src="./flowers/6.png"></div>
+								<div class="slidebox__card--price">
+									<p>450 ₴
+									</p>
+								</div>
+								<div class="slidebox__card--flower"><span>«Бархатний сезон»</span></div>
+								<div class="slidebox__card--hov">
+									<div class="hovers">
+										<p>Хрезантема - 6 шт. (50 см.), </p>
+										<p>Троянда міні - 4 шт., </p>
+									</div>
+									<button>Замовити</button>
+								</div>
+							</div>
+							<div class="slidebox__card">
+								<div class="slidebox__card--heart"><img src="./flowers/heart.png"></div>
+								<div class="slidebox__card--img"><img src="./flowers/5.png"></div>
+								<div class="slidebox__card--price">
+									<p>56 ₴
+									</p>
+								</div>
+								<div class="slidebox__card--flower"><span>Нобіліс</span></div>
+								<div class="slidebox__card--hov">
+									<div class="hovers">
+										<p>Хрезантема - 6 шт. (50 см.), </p>
+										<p>Троянда міні - 4 шт., </p>
+									</div>
+									<button>Замовити</button>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+
+			<div class="quality" id="qual">
+
+				<div class="quality__link link--left">
+					<p>Якість в деталях
+					</p>
+				</div>
+				<div class="quality__container">
+					<div class="quality__block">
+						<img class="quality__block--img" src="./gelery/1.svg" alt="#" width="650px">
+						<div class="quality__block--text">
+							<h3>Контроль свіжості квітів </h3>
+							<p>Ми співпрацюємо з кращими постачальниками квітів і готові запропонувати Вам <span>широкий
+									асортимент
+									квітів</span>,
+								починаючи від місцевих сортів і закінчуючи рідкісними імпортованими варіантами.
+								Ваша близька людина отримає найкращий подарунок, адже ми ретельно підбираємо кожну
+								квітку для вашого
+								букету.</p>
+						</div>
+					</div>
+					<div class="quality__block zamena">
+						<div class="quality__block--text">
+							<h3>Оформлення букетів</h3>
+							<p>Ми готові зібрати <span>унікальний букет по індивідуальному замовленню</span> . Наші
+								флористи втілять в
+								життя будь
+								яку Вашу ідею!</p>
+						</div>
+						<img class="quality__block--img" src="./gelery/2.svg" alt="#">
+					</div>
+					<div class="quality__block">
+						<img class="quality__block--img" src="./gelery/3.svg" alt="#">
+						<div class="quality__block--text">
+							<h3>Швидка доставка</h3>
+							<p>Ми робимо доставки по Україні протягом <span>3-х годин</span> з моменту оплати
+								замовлення. </p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="order" id="ord">
+				<div class="order__link link--left" data-aos="fade-down-right" data-aos-duration="1500">
+					<p data-aos="fade-down" data-aos-duration="2000">Не можете визначитись з вибором букету? </p>
+				</div>
+				<div class="order__box">
+					<div class="order__box--pupup">
+						<img src="./icons/x.png" alt="#">
+						<h1>Дякуємо!</h1>
+						<p>Найближчим часом наш менеджер звʼяжеться з вами.</p>
+					</div>
+					<div class="order__box--label">
+						<h3>Відправте заявку<br>
+							і Вам зателефонують<br>
+							протягом однієї хвилини</h3>
+						<div class="order--name">
+							<input type="text" id="name" name="firstname" placeholder="Ім’я..">
+						</div>
+						<div class="order--phone">
+							<input type="text" id="telephone" name="telephone" placeholder="Телефон">
+						</div>
+						<button class="order--button">
+							<p>Залишити заявку</p>
+						</button>
+					</div>
+
+					<div class="order__box--meneger">
+						<h3>Наш менеджер по телефону: </h3>
+						<div class="box--meneger">
+							<p><span>Відповість</span> на будь які запитання</p>
+							<p><span>Підбере рішення</span> відповідно
+								до ваших запитів та бажань</p>
+							<p><span>Підготує унікальну пропозицію</span>
+								та детально розповість Вам про наші букети</p>
+							<p><span>Оформить </span>для Вас подарунок-сюрприз</p>
+
+						</div>
+					</div>
+				</div>
+				<div id="client"></div>
+			</div>
+
+			<div class="client">
+				<div class="client__link link--right">
+					<p>Наші клієнти</p>
+				</div>
+				<div class="client__slider">
+					<div class="swiper myswiper">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide"><img src="./slider/1.png" alt="#"></div>
+							<div class="swiper-slide"><img src="./slider/2.png" alt="#"></div>
+							<div class="swiper-slide"><img src="./slider/3.png" alt="#"></div>
+							<div class="swiper-slide"><img src="./slider/4.png" alt="#"></div>
+							<div class="swiper-slide"><img src="./slider/photo1.png" alt="#"></div>
+							<div class="swiper-slide"><img src="./slider/photo2.png" alt="#"></div>
+							<div class="swiper-slide"><img src="./slider/photo3.png" alt="#"></div>
+
+						</div>
+						<div class="swiper-pagination"></div>
+					</div>
+
+				</div>
+
+
+			</div>
+
+		</div>
+
+
+		<footer class="footer" id="footer">
+			<div class="footer__left">
+				<p><a href="#head">Початок</a></p>
+				<p><a href="#catalog">Каталог</a></p>
+				<p><a href="#client">Відгуки</a></p>
+				<p><a href="#ord">Замовити</a></p>
+				<p>Контакти</p>
+			</div>
+			<div class="footer__center">
+				<img src="./header/лого.png" alt="#">
+				<div class="footer__center--icon">
+					<img src="./icons/fa.png" alt="#">
+					<img src="./icons/inst.png" alt="#">
+					<img src="./icons/ph.png" alt="#">
+				</div>
+			</div>
+			<div class="footer__right">
+				<p>+38097 777 77 77<br>
+					Наш телефон</p>
+				<p>info@floverlover.ua<br>
+					Контактний е-mail</p>
+				<p>Харків<br>
+					вул.Люба, 14.<br>
+					Наш магазин</p>
+			</div>
+		</footer>
+
+
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+	<!-- +подкл библиотеку  swiper в БОДИ !!!!   перед основным    <script src="./js/script.js"> остальная инициализация в файле  <script src="./js/script.js"> -->
+	<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+	<!-- AOS -->
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	<!-- свой файл -->
+	<script src="./js/script.js"></script>
+
+
+
+</body>
+
+</html>

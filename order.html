@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel=" stylesheet" href="css/style.css">
+	<title>order</title>
+
+</head>
+
+<body>
+
+
+	<div class="wrapper">
+		<div class="wrapper__container">
+			<div class="container--box">
+				<h1>Ваше замовлення</h1>
+
+				<form>
+					<div>
+						<label>Цена: </label><span id="price-field"></span>
+					</div>
+					<div>
+						<label>Квіти: </label><span id="flower-field">Здесь будет выбранная Квіти</span>
+					</div>
+					<div>
+						<label>Квіти: </label><span id="people-field">Здесь будет выбранная Квіти</span>
+					</div>
+					<div>
+						<label>Квіти: </label><span id="movee-field">Здесь будет выбранная Квіти</span>
+					</div>
+					<div>
+						<label>Квіти: </label><span id="style-field">Здесь будет выбранная Квіти</span>
+					</div>
+
+					<button type="submit">Відправити замовлення</button>
+
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// Функция для обновления отображения корзины
+		function updateCartDisplay() {
+			const selectedPrices = JSON.parse(localStorage.getItem('selectedPrices')) || [];
+			const selectedFlowers = JSON.parse(localStorage.getItem('selectedFlowers')) || [];
+			const selectedPeople = JSON.parse(localStorage.getItem('selectedPeople')) || [];
+			const selectedMove = JSON.parse(localStorage.getItem('selectedMove')) || [];
+			const selectedStyle = JSON.parse(localStorage.getItem('selectedStyle')) || [];
+
+			// Обновляем отображение выбранных цен и цветов
+			document.getElementById('price-field').textContent = selectedPrices.join(', ') || 'Не вибрана ціна';
+			document.getElementById('flower-field').textContent = selectedFlowers.join(', ') || 'Не вибрани квіти';
+			document.getElementById('people-field').textContent = selectedPeople.join(', ') || 'Не вибрано кому';
+			document.getElementById('movee-field').textContent = selectedMove.join(', ') || 'Не вибрано привід';
+			document.getElementById('style-field').textContent = selectedStyle.join(', ') || 'Не вибрано стиль';
+		}
+
+		// Слушаем изменения в localStorage
+		window.addEventListener('storage', updateCartDisplay);
+
+		// Инициализация отображения данных корзины при загрузке
+		updateCartDisplay();
+	</script>
+</body>
+
+</html>

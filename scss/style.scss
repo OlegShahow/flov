@@ -1,0 +1,1191 @@
+// обновлять страницу после смены стиля рут ....
+
+@import "null.scss";
+@import "var.scss";
+@import "basestyle.scss";
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@function toRem($value) {
+	// Базовый размер шрифта (обычно 16px)
+	$baseFontSize: 16;
+	// Вычисление значения в rem
+	@return ($value / $baseFontSize) * 1rem;
+}
+// !Миксины ================================================================================
+// adaptiveValue = ($property-css стиль, $pcSize-максимальный параметр, $mobSize-минимальный параметр)
+
+// $minWidth: 320; // Минимальная ширина страницы
+// // $maxWidth: 1440; // Ширина полотна (макета)
+// $maxWidthContainer: toRem(1230); // Ширина ограничивающего контейнера
+// $containerPadding: toRem(30); // Отступ от контейнера по 15 слева и справа
+// $containerWidth: $maxWidthContainer + $containerPadding; // Ширина срабатывания первого брекпоинта
+// Брейк-поинты------------------------------------------------------------------------------
+// $pc: em($containerWidth);
+// $pc: $containerWidth;
+// // $tablet: em(991.98);
+// $tablet: toRem(991.98);
+// // $mobile: em(767.98);
+// $mobile: toRem(767.98);
+// // $mobileSmall: em(479.98);
+// $mobileSmall: toRem(479.98);
+
+$maxWidth: 1920; // Ширина полотна (макета)
+
+@mixin adaptiveValue($property, $pcSize, $mobSize) {
+	$addSize: $pcSize - $mobSize;
+	$addMobSize: $addSize + $addSize * 0.7;
+
+	@media (min-width: toRem(1920)) {
+		#{$property}: #{$pcSize + px};
+	}
+
+	@media (max-width: toRem(1920)) {
+		@media (max-width: 1920px) {
+			#{$property}: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 767px) / #{$maxWidth}));
+		}
+
+		// @media (max-width: 767px) {
+		// 	#{$property}: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
+		// }
+	}
+}
+//   @include adaptiveValue ($property , $pcSize, $mobSize);
+
+// ..................................................................................
+// общие стили
+[class*="__container"] {
+	max-width: 1342px;
+	padding: 0 15px;
+	margin: 0 auto;
+	// border: 1px solid white;
+}
+
+.lock {
+	overflow: hidden;
+}
+
+.link--left p,
+.link--right p {
+	font-family: "PlayfairDisplay-Bold";
+	font-size: toRem(34);
+	color: #a93b59;
+}
+.link--left,
+.link--right {
+	border-bottom: 3px solid rgb(181, 7, 7);
+	padding-bottom: toRem(10);
+}
+.subcontainer {
+	max-width: toRem(1085);
+	margin: 0 auto;
+
+	& img {
+		width: toRem(40);
+		margin-top: toRem(40);
+		cursor: pointer;
+	}
+}
+
+// ......................................................................................
+
+.wrapper {
+	background-color: black;
+}
+
+// ========================================================================================
+
+.header {
+	position: sticky;
+	padding: 24px 0 24px 0;
+	z-index: 1000;
+	&__container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background-color: black;
+		@media (max-width: toRem(769)) {
+		}
+	}
+
+	&__burger {
+		height: 100px;
+		display: none;
+		position: absolute;
+		top: toRem(40);
+		right: toRem(30);
+		width: toRem(30);
+		height: toRem(25);
+		z-index: 100;
+
+		@media (max-width: toRem(769)) {
+			display: block;
+			z-index: 100;
+		}
+
+		& .active {
+			top: 30px;
+		}
+		& span {
+			display: block;
+			position: absolute;
+			width: 100%;
+			height: 2px;
+			background-color: white;
+			top: 12px;
+		}
+		&.active span {
+			transform: scale(0);
+		}
+
+		&:before {
+			content: "";
+			background-color: rgb(222, 216, 216);
+			position: absolute;
+			width: 100%;
+			height: 2px;
+			left: 0;
+			top: 0;
+		}
+		&.active::before {
+			transform: rotate(45deg);
+			top: 10px;
+			transition: all 0.5s;
+		}
+
+		&:after {
+			content: "";
+			background-color: white;
+			position: absolute;
+			width: 100%;
+			height: 2px;
+			left: 0;
+			bottom: 0;
+		}
+		&.active::after {
+			transform: rotate(-45deg);
+			top: 10px;
+			transition: all 0.5s;
+		}
+	}
+
+	&__photo {
+		z-index: 10;
+	}
+
+	&__menu {
+		@media (max-width: toRem(769)) {
+			position: absolute;
+			top: -550px;
+			left: 0;
+			width: 100%;
+
+			// height: 100vh;  НЕ ПИСАТЬ  , ТОЛЬКО ПРИ АКТИВ !!!!!!!
+			overflow: auto;
+			padding-top: toRem(100);
+			transition: all 0.5s ease;
+			background-color: black;
+		}
+	}
+
+	&__list {
+		display: flex;
+		column-gap: toRem(24);
+
+		& img {
+			width: toRem(40);
+			cursor: pointer;
+		}
+
+		@media (max-width: toRem(769)) {
+			flex-direction: column;
+			row-gap: toRem(30);
+			align-items: center;
+		}
+
+		& a {
+			color: white;
+			font-family: "SourceSansPro";
+			font-size: toRem(18);
+			color: white;
+			&:hover {
+				color: #a93b59;
+				border-bottom: 1px dashed #6d0924;
+			}
+			@media (max-width: toRem(769)) {
+				font-size: toRem(28);
+				border-bottom: none;
+			}
+		}
+	}
+}
+.header__burger.active {
+	top: 30px;
+}
+.active {
+	top: 0;
+}
+.header__menu.active {
+	width: 100%;
+	height: 100vh;
+}
+
+// =================================================================================
+
+.main {
+	// margin-top: 109px;
+	@include adaptiveValue("margin-top", 109, 20);
+}
+
+.hero {
+	background-image: url(../main-hero/flover.svg);
+	background-repeat: no-repeat;
+	background-position: 100% top;
+
+	&::before {
+		content: "";
+		width: 600px;
+		height: 600px;
+		border: 3px solid #a93b59;
+		border-top: 1px solid rgba(196, 14, 14, 0);
+		border-right: 1px solid rgba(196, 14, 14, 0);
+		border-radius: 50%;
+		margin-top: 140px;
+		right: 260px;
+		background-color: rgba(255, 217, 0, 0);
+		position: absolute;
+
+		@media (max-width: toRem(1441)) {
+			width: 560px;
+			height: 560px;
+			margin-top: 140px;
+			right: 260px;
+		}
+
+		@media (max-width: toRem(1200)) {
+			width: 560px;
+			height: 560px;
+			margin-top: 50px;
+			right: 100px;
+		}
+		@media (max-width: toRem(969)) {
+			width: 400px;
+			height: 400px;
+			margin-top: 90px;
+			right: 150px;
+		}
+		@media (max-width: toRem(770)) {
+			display: none;
+		}
+	}
+
+	@media (max-width: toRem(1200)) {
+		background-size: 590px 524px;
+	}
+
+	@media (max-width: toRem(969)) {
+		background-size: 490px 424px;
+	}
+
+	@media (max-width: toRem(426)) {
+		background-position: -50% top;
+	}
+
+	&__container {
+		border: 1px solid rgba(255, 255, 255, 0);
+		padding-bottom: toRem(52);
+	}
+
+	&__box {
+		// border: 1px solid white;
+
+		@media (max-width: toRem(630)) {
+			// @include adaptiveValue("margin-top", 800, 10);
+			margin-top: 350px;
+			padding: toRem(40) toRem(20);
+			background-color: #c9a1ace1;
+			// opacity: 0.8;
+		}
+		& span {
+			font-family: "PlayfairDisplay-Italic";
+			font-size: toRem(48);
+			color: #a93b59;
+			@include adaptiveValue("font-size", 48, 28);
+		}
+	}
+
+	&__botton {
+		color: #f5ebeb;
+		background-color: #a93b59;
+		display: flex;
+		justify-content: center;
+		border-radius: 10px;
+		margin-top: toRem(42);
+		@include adaptiveValue("width", 456, 260);
+		& a {
+			line-height: 3;
+			color: white;
+			@include adaptiveValue("font-size", 24, 18);
+		}
+		@media (max-width: toRem(426)) {
+			margin-top: 0;
+		}
+	}
+
+	&__title {
+		display: flex;
+		margin-top: toRem(12);
+		@include adaptiveValue("margin-left", 100, 18);
+		margin-bottom: toRem(24);
+	}
+
+	&__title h1 {
+		font-family: "PlayfairDisplay-Regular";
+		text-transform: uppercase;
+		color: #f5ebeb;
+		@include adaptiveValue("font-size", 90, 50);
+		// margin-right: toRem(24);
+		@include adaptiveValue("margin-right", 24, 15);
+	}
+
+	&__list {
+		display: flex;
+		@include adaptiveValue("margin-top", 436, 240);
+		justify-content: center;
+		// border: 1px solid white;
+
+		@media (max-width: toRem(1441)) {
+			margin-top: toRem(436);
+		}
+
+		@media (max-width: toRem(1200)) {
+			margin-top: toRem(376);
+		}
+
+		@media (max-width: toRem(969)) {
+			margin-top: toRem(280);
+		}
+
+		@media (max-width: toRem(630)) {
+			margin-top: toRem(40);
+		}
+	}
+
+	&__list ul {
+		display: flex;
+		// column-gap: toRem(124);
+		@include adaptiveValue("column-gap", 124, 40);
+		// border: 1px solid white;
+		& li {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+		}
+	}
+	&__list p {
+		font-size: toRem(15);
+		color: white;
+		margin-top: toRem(6);
+		line-height: 1.2;
+		letter-spacing: 1px;
+		@media (max-width: toRem(630)) {
+			& br {
+				display: none;
+			}
+		}
+	}
+}
+.delivery {
+	font-family: "SourceSansPro";
+	// font-size: toRem(24);
+	@include adaptiveValue("font-size", 24, 16);
+	color: #f5ebeb;
+
+	@media (max-width: toRem(426)) {
+		display: none;
+	}
+}
+.hero {
+	&__img {
+		// background-image: url(../main-hero/flover.png);
+		// background-repeat: no-repeat;
+		// background-position: top;
+		// background-size:contain;
+		display: flex;
+		width: toRem(780);
+		background-color: black;
+		border: 1px solid white;
+
+		@media (max-width: toRem(969)) {
+			order: 1;
+		}
+
+		& img {
+			@include adaptiveValue("width", 768, 490);
+		}
+	}
+
+	&__img--bg {
+		// position: absolute;
+		left: -90px;
+		margin-top: 240px;
+		opacity: 0.5;
+		width: toRem(485);
+		height: toRem(485);
+		background-color: rgba(0, 0, 0, 0);
+		border: 3px solid rgb(180, 18, 18);
+		border-right: 1px solid rgba(255, 255, 255, 0);
+		border-top: 1px solid rgba(255, 255, 255, 0);
+		border-radius: 50%;
+		z-index: 20;
+
+		@media (max-width: toRem(969)) {
+			display: none;
+		}
+	}
+
+	// &__img--img {
+
+	// }
+}
+// ========================   .catalog =========================================================
+
+.catalog {
+	@include adaptiveValue("padding-top", 50, 20);
+	@include adaptiveValue("padding-bottom", 50, 40);
+	// border: 1px solid white;
+	background-image: url(../main-hero/fone.svg);
+	background-repeat: no-repeat;
+	background-position: right;
+	background-size: contain;
+
+	@media (max-width: toRem(491)) {
+		background-image: none;
+	}
+	&__link {
+		// max-width: toRem(600);
+		@include adaptiveValue("max-width", 600, 350);
+		text-align: end;
+		// border: 1px solid white;
+	}
+
+	&__container {
+		@include adaptiveValue("margin-top", 100, 50);
+		// border: 1px solid white;
+	}
+
+	&__title {
+		text-align: center;
+		// border: 1px solid white;
+		background-color: #a93b58a1;
+		border-radius: toRem(10);
+	}
+	&__title p {
+		font-family: "PlayfairDisplay-Bold";
+		// font-size: toRem(34);
+		@include adaptiveValue("font-size", 34, 28);
+		color: #faf7f8;
+		line-height: 1.7;
+	}
+
+	&__nav {
+		margin-top: 10px;
+		display: flex;
+		justify-content: space-between;
+		border-radius: 10px;
+		background-color: #a93b59;
+
+		@media (max-width: toRem(1025)) {
+			flex-direction: column;
+			align-items: center;
+			// border: 1px solid rgb(250, 249, 249);
+			// @include adaptiveValue("width",1000 , 200);
+		}
+	}
+}
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+
+.dropdown {
+	// border: 1px solid white;
+	position: relative;
+	display: inline-block;
+
+	@media (width: toRem(1025)) {
+		border: 1px solid rgb(250, 249, 249);
+		@include adaptiveValue("width", 1025, 200);
+		// width: 1020px;
+		// display: flex;
+	}
+}
+
+.dropbtn {
+	width: toRem(200);
+	padding: toRem(19) toRem(20);
+	display: flex;
+	font-family: "SourceSansPro-Light";
+	color: white;
+	background-color: #a93b59;
+	background-image: url(../icons/chevron.png);
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+	border-radius: 10px;
+	@include adaptiveValue("font-size", 20, 18);
+	@media (max-width: toRem(1025)) {
+		@include adaptiveValue("width", 1025, 510);
+		border-bottom: 1px solid white;
+	}
+
+	&:hover,
+	:focus {
+		background-color: #e2436e;
+	}
+}
+.inp input[type="checkbox"] {
+	/* стили для checkbox */
+	width: toRem(16);
+	height: toRem(16);
+	cursor: pointer;
+}
+.dropdown-content {
+	display: none;
+	position: absolute;
+	top: toRem(60);
+	padding: toRem(20);
+	text-align: center;
+	align-items: center;
+	background-color: #e2436e;
+	min-width: 200px;
+	border-radius: 10px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 5;
+
+	@media (max-width: toRem(1025)) {
+		@include adaptiveValue("width", 1025, 510);
+		margin-top: toRem(5);
+		border-bottom: 1px solid white;
+	}
+	& button {
+		padding: toRem(15);
+		border-radius: 10px;
+		font-family: "SourceSansPro-Bold";
+		// font-size: toRem(16);
+		color: white;
+		background-color: #6d0924;
+		margin-top: toRem(10);
+
+		&.active {
+			background-color: #2cea62; /* новый цвет фона при нажатии */
+		}
+	}
+
+	& label {
+		border-bottom: 1px solid rgba(255, 255, 255, 0.455);
+		color: white;
+		padding: 12px 16px;
+		// font-size: toRem(20);
+		@include adaptiveValue("font-size", 20, 18);
+		text-decoration: none;
+		display: block;
+		&:hover {
+			background-color: #6d092437;
+		}
+	}
+	& .inp {
+		position: relative;
+	}
+
+	& input {
+		position: absolute;
+		top: 25%;
+		left: 0;
+	}
+}
+
+.dropdown-content.show {
+	display: block;
+	animation: openDropdown 0.7s ease;
+}
+
+@keyframes openDropdown {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.aft {
+	display: none;
+}
+
+// =========================   galery   ===========================================================
+
+.galery {
+	z-index: 50;
+	@include adaptiveValue("margin-top", 50, 20);
+	&__container {
+	}
+	&__title {
+	}
+	&__title p {
+		font-family: "PlayfairDisplay-Bold";
+		text-align: center;
+		@include adaptiveValue("font-size", 34, 28);
+		color: #faf7f8;
+		line-height: 1.7;
+	}
+
+	&__slidebox {
+		margin-top: toRem(20);
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		row-gap: toRem(20);
+		overflow: visible;
+		@media (max-width: toRem(746)) {
+			justify-content: center;
+			column-gap: toRem(36);
+		}
+		@media (max-width: toRem(491)) {
+			/* Добавляем стили горизонтального слайдера */
+			overflow-x: auto;
+			overflow-y: hidden;
+			white-space: nowrap;
+			flex-wrap: nowrap;
+			justify-content: flex-start;
+			padding: 20px;
+		}
+	}
+}
+.subcontainer {
+}
+.slidebox {
+	&__card {
+		position: relative;
+		// max-width: toRem(320);
+		@include adaptiveValue("width", 320, 240);
+		display: flex;
+		align-items: center;
+		padding: 20px 0;
+		flex-direction: column;
+		background-color: white;
+		border-radius: 10px;
+		border: 1px solid rgb(250, 249, 249);
+		cursor: pointer;
+		@media (max-width: 491px) {
+			/* Делаем карточки inline-block и удаляем отступы */
+			display: inline-block;
+			// margin: 0;
+			margin-right: 70px;
+			padding: 10px;
+			text-align: center;
+		}
+	}
+	&__card:hover {
+		.slidebox__card--hov {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			@include adaptiveValue("width", 320, 240);
+			position: absolute;
+			top: 97%;
+			padding: 10px 0;
+			background-color: rgb(219, 206, 206);
+			border-bottom-right-radius: 10px;
+			border-bottom-left-radius: 10px;
+			border-bottom: #e2436e;
+			z-index: 5;
+			animation: hovertime 0.5s ease;
+			@keyframes hovertime {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			@media (max-width: 491px) {
+				display: none;
+			}
+			& .hovers {
+				z-index: 50;
+				background-color: #a93b58a1;
+				border-radius: 10px;
+				padding: 10px;
+				& p {
+					color: black;
+					line-height: 1.2;
+				}
+			}
+			& button {
+				margin-top: toRem(20);
+				background-color: #a93b58a1;
+				padding: 10px 20px;
+				border-radius: 10px;
+			}
+		}
+	}
+	&__card--heart {
+		position: absolute;
+		right: 20px;
+		// pointer-events: none;
+
+		& .color {
+			background-image: url(../flowers/icons.png);
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: cover;
+			z-index: 150;
+		}
+	}
+
+	&__card--img {
+		@include adaptiveValue("width", 320, 220);
+	}
+	&__card--img img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	&__card--price {
+		margin: 16px 0;
+	}
+	&__card--price p {
+		font-family: "SourceSansPro-Light";
+		@include adaptiveValue("font-size", 34, 24);
+		color: black;
+	}
+	&__card--flower {
+		font-family: "SourceSansPro-Light";
+		font-size: toRem(16);
+	}
+	&__card--hov {
+		display: none;
+	}
+}
+
+// ===============================================================================
+
+.quality {
+	position: relative;
+	@include adaptiveValue("margin-top", 96, 50);
+	background-color: black;
+	@include adaptiveValue("padding-bottom", 50, 40);
+	&__link {
+		@include adaptiveValue("width", 600, 350);
+		position: absolute;
+		top: 0;
+		right: 0;
+		text-align: left;
+	}
+	&__link {
+	}
+
+	&__container {
+		@include adaptiveValue("padding-top", 200, 150);
+	}
+
+	&__block {
+		display: flex;
+		justify-content: space-between;
+		@media (max-width: toRem(821)) {
+			flex-direction: column;
+			// align-items: center;
+		}
+	}
+
+	&__block--img {
+		@include adaptiveValue("width", 656, 350);
+		height: auto;
+		@media (max-width: toRem(821)) {
+			width: 100%;
+		}
+	}
+
+	&__block--text {
+		color: white;
+		// border: 1px solid white;
+		@include adaptiveValue(" padding-left", 80, 30);
+		padding-right: toRem(20);
+		padding-bottom: toRem(20);
+	}
+	&__block--text h3 {
+		font-family: "SourceSansPro";
+
+		@include adaptiveValue("font-size", 32, 26);
+		@include adaptiveValue(" margin-top", 120, 40);
+		margin-bottom: toRem(20);
+	}
+	&__block--text p {
+		font-family: "SourceSansPro-Light";
+		line-height: 1.2;
+		@include adaptiveValue("font-size", 20, 20);
+	}
+	&__block--text span {
+		font-family: "SourceSansPro-Bold";
+		// font-size: toRem(20);
+		@include adaptiveValue("font-size", 20, 20);
+	}
+}
+
+.zamena {
+	@media (max-width: toRem(821)) {
+		.quality__block--text {
+			order: 2;
+		}
+		.quality__block--img {
+			order: 1;
+		}
+	}
+}
+
+.link--right {
+}
+// ======================   .order   ===================================================
+
+.order {
+	@include adaptiveValue("padding-top", 50, 20);
+	@include adaptiveValue("padding-bottom", 339, 20);
+	// border: 1px solid white;
+	background-image: url(../main-hero/fo.svg);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: left bottom 0;
+	@media (max-width: toRem(769)) {
+		background-image: none;
+	}
+	&__link {
+		@include adaptiveValue("max-width", 1200, 550);
+		text-align: end;
+		// border: 1px solid white;
+	}
+	&__link p {
+		@include adaptiveValue("font-size", 34, 28);
+	}
+	&__box {
+		position: relative;
+		@include adaptiveValue("margin-top", 140, 50);
+		background-color: #b96a7f67;
+		@include adaptiveValue("padding-top", 40, 20);
+		@include adaptiveValue("padding-left", 64, 10);
+		@include adaptiveValue("padding-right", 64, 10);
+		@include adaptiveValue("padding-bottom", 86, 10);
+		display: flex;
+		justify-content: space-around;
+		// border: 1px solid white;
+		@media (max-width: toRem(769)) {
+			flex-direction: column;
+			row-gap: toRem(20);
+		}
+	}
+	&__box--label {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		@include adaptiveValue("padding-left", 40, 20);
+		@include adaptiveValue("padding-right", 40, 20);
+		// border: 1px solid white;
+	}
+	&__box--label h3 {
+		font-family: "SourceSansPro";
+		@include adaptiveValue("font-size", 32, 28);
+		@include adaptiveValue("margin-bottom", 40, 26);
+		color: white;
+	}
+
+	&__box--meneger {
+		@include adaptiveValue("padding-left", 40, 20);
+		@include adaptiveValue("padding-right", 40, 20);
+		text-align: center;
+		// border: 1px solid white;
+	}
+
+	&__box--meneger h3 {
+		font-family: "SourceSansPro";
+		@include adaptiveValue("font-size", 32, 28);
+		@include adaptiveValue("margin-bottom", 40, 26);
+		color: white;
+	}
+}
+.link--left {
+}
+.order--name input,
+.order--phone input {
+	@include adaptiveValue("margin-bottom", 40, 20);
+	font-family: "SourceSansPro-Bold";
+	font-size: 28px;
+	color: black;
+	@include adaptiveValue("width", 416, 320);
+	@include adaptiveValue("height", 70, 50);
+	// border: 1px solid white;
+	border-radius: 10px;
+	padding-left: toRem(20);
+	@include adaptiveValue("font-size", 20, 10);
+	background-image: url(../icons/person.svg);
+	background-repeat: no-repeat;
+	background-position: center right 30px;
+}
+.order--phone input {
+	background-image: url(../icons/pone.svg);
+	background-repeat: no-repeat;
+	background-position: center right 30px;
+}
+.order--button {
+	color: #f5ebeb;
+	background-color: #a93b59;
+	display: flex;
+	justify-content: center;
+	border-radius: 10px;
+	margin-top: toRem(42);
+	@include adaptiveValue("width", 456, 260);
+	& p {
+		text-transform: uppercase;
+		line-height: 3;
+		color: white;
+		@include adaptiveValue("font-size", 24, 18);
+	}
+}
+.box--meneger {
+	@include adaptiveValue("font-size", 26, 20);
+	@include adaptiveValue("max-width", 535, 320);
+	color: white;
+	// border: 1px solid white;
+	@media (max-width: toRem(769)) {
+		// обновить max-width: после запроса !!!!!!!!!!!!!!!!!!!!@include adaptiveValue("max-width", 535, 320);
+		max-width: 750px;
+	}
+}
+.box--meneger p {
+	font-family: "SourceSansPro";
+	@include adaptiveValue("margin-bottom", 40, 26);
+	line-height: 1.3;
+	padding-left: toRem(70);
+	background-image: url(../icons/utline_.svg);
+	background-repeat: no-repeat;
+	background-position: left;
+	// border: 1px solid white;
+}
+.box--meneger span {
+	font-family: "SourceSansPro-Bold";
+}
+// ...................  pupup  ..............................
+
+.order__box--pupup {
+	background-color: #b96a7f;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	// display: flex;
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	@media (max-width: toRem(769)) {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 90%;
+		height: 50%;
+		text-align: center;
+		border-radius: 30px;
+	}
+}
+.order__box--pupup h1 {
+	margin-bottom: toRem(20);
+	font-size: 34px;
+	color: #a93b59;
+	font-family: "PlayfairDisplay-Italic";
+}
+.order__box--pupup p {
+	font-size: 24px;
+	color: white;
+	font-family: "SourceSansPro";
+	border-bottom: 3px solid #a93b59;
+	padding-bottom: toRem(20);
+}
+.order__box--pupup img {
+	position: absolute;
+	top: 50px;
+	right: 50px;
+	background-color: #f5ebeb;
+	border-radius: 50%;
+	rotate: 45deg;
+	cursor: pointer;
+	@media (max-width: toRem(769)) {
+		width: toRem(20);
+		top: 20px;
+		right: 20px;
+	}
+}
+
+// ==========================  .client  =======================================================
+
+.client {
+	position: relative;
+	// margin-top: -140px;
+	@include adaptiveValue(" margin-top", -140, 0);
+	// border: 1px solid white;
+
+	&__link {
+		@include adaptiveValue("width", 600, 350);
+		position: absolute;
+		// top:-140px;
+		@include adaptiveValue("top", -140, -80);
+		right: 0;
+		text-align: left;
+	}
+}
+.link--right {
+}
+
+.client {
+	&__slider {
+		@include adaptiveValue("margin-top", 140, 90);
+		position: relative;
+		height: toRem(458);
+		// высота слайд-линии
+		@media (max-width: toRem(969)) {
+			height: toRem(258);
+		}
+		@media (max-width: toRem(426)) {
+			height: toRem(158);
+		}
+	}
+}
+.swiper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.swiper-wrapper {
+	column-gap: 10px;
+}
+.swiper-slide {
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.swiper-slide img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.swiper-pagination {
+	background-color: #a93b585e;
+}
+
+// ==========================   .footer    =======================================================
+
+.footer {
+	border-top: 3px solid red;
+	padding-top: toRem(20);
+	@include adaptiveValue("margin-top", 100, 50);
+	display: flex;
+	justify-content: space-around;
+	@media (max-width: toRem(600)) {
+		flex-direction: column;
+		row-gap: toRem(40);
+		align-items: center;
+	}
+	&__left {
+		@media (max-width: toRem(600)) {
+			order: 3;
+		}
+	}
+	&__left a,
+	&__left p,
+	&__right p {
+		color: white;
+		font-size: toRem(24);
+		font-family: "SourceSansPro";
+		@include adaptiveValue("margin-bottom", 40, 20);
+		line-height: 1.3;
+		cursor: pointer;
+	}
+	&__center {
+		text-align: center;
+		@include adaptiveValue("margin-top", 90, 10);
+		@media (max-width: toRem(600)) {
+			order: 1;
+		}
+	}
+
+	&__right {
+		text-align: center;
+		@media (max-width: toRem(600)) {
+			order: 2;
+		}
+	}
+}
+.footer__center--icon img {
+	display: block;
+}
+.footer__center--icon {
+	display: flex;
+	column-gap: 50px;
+	@include adaptiveValue("margin-top", 50, 20);
+}
+
+// ==================================================================================================
+// ==================================================================================================
+
+.wrapper {
+	&__container {
+		height: 100vh;
+		display: flex;
+		// align-items: center;
+		padding-top: toRem(100);
+		justify-content: center;
+	}
+}
+.container--box {
+	width: toRem(350);
+	height: toRem(450);
+	padding: toRem(10);
+	background-color: rgba(255, 255, 255, 0.261);
+	border: 2px dashed rgb(245, 242, 242);
+
+	& form {
+		display: flex;
+		flex-direction: column;
+		row-gap: toRem(20);
+		& button {
+			margin-top: toRem(30);
+			padding: toRem(10);
+			border-radius: 10px;
+			text-transform: uppercase;
+			font-size: toRem(16);
+			font-weight: 600;
+			background-color: rgba(172, 255, 47, 0.463);
+			letter-spacing: 2px;
+		}
+	}
+
+	& label {
+		color: white;
+		font-size: toRem(20);
+		border-bottom: 1px dashed white;
+	}
+	& span {
+		color: white;
+		font-size: toRem(20);
+		margin-left: toRem(20);
+	}
+	& h1 {
+		color: white;
+		font-size: toRem(50);
+		text-align: center;
+		margin-bottom: toRem(20);
+		text-shadow: 2px 2px 3px rgb(172, 255, 47);
+	}
+}
