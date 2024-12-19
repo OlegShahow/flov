@@ -17,27 +17,27 @@
 			<div class="container--box">
 				<h1>Ваше замовлення</h1>
 
-				<form>
+				<form id="floverform" action="https://eovtp05m9i42muv.m.pipedream.net" method="POST">
 					<div>
 						<label>Цена: </label><span id="price-field"></span>
 					</div>
 					<div>
-						<label>Квіти: </label><span id="flower-field">Здесь будет выбранная Квіти</span>
+						<label>Квіти: </label><span id="flower-field"></span>
 					</div>
 					<div>
-						<label>Квіти: </label><span id="people-field">Здесь будет выбранная Квіти</span>
+						<label>Квіти: </label><span id="people-field"></span>
 					</div>
 					<div>
-						<label>Квіти: </label><span id="movee-field">Здесь будет выбранная Квіти</span>
+						<label>Квіти: </label><span id="movee-field"></span>
 					</div>
 					<div>
-						<label>Квіти: </label><span id="style-field">Здесь будет выбранная Квіти</span>
+						<label>Квіти: </label><span id="style-field"></span>
 					</div>
 
 					<button type="submit">Відправити замовлення</button>
 
 				</form>
-
+				<button class="close" onclick="closePage()">Відміна замовлення</button>
 
 			</div>
 		</div>
@@ -65,7 +65,57 @@
 
 		// Инициализация отображения данных корзины при загрузке
 		updateCartDisplay();
+		// .................................................. отправка на сервер ............................................
+
+		document.getElementById('floverform').addEventListener('submit', function (event) {
+			// Прерывание стандартного поведения формы (если не используем стандартную отправку)
+			event.preventDefault();
+
+			// Получаем данные, которые нужно отправить
+			const price = document.getElementById('price-field').innerText;
+			const flowers = document.getElementById('flower-field').innerText;
+			const people = document.getElementById('people-field').innerText;
+			const movee = document.getElementById('movee-field').innerText;
+			const style = document.getElementById('style-field').innerText;
+
+			// Создаем объект с данными для отправки
+			const formData = new FormData();
+			formData.append('price', price);
+			formData.append('flowers', flowers);
+			formData.append('people', people);
+			formData.append('movee', movee);
+			formData.append('style', style);
+
+			// Отправка данных на сервер с использованием Fetch API
+			fetch(event.target.action, {
+				method: event.target.method,
+				body: formData
+			})
+				.then(response => response.json()) // если сервер возвращает JSON
+				.then(data => {
+					console.log('Success:', data);
+					// Можете добавить сообщение об успешной отправке или что-то еще
+				})
+				.catch(error => {
+					console.error('Error:', error);
+					// Обработать ошибку отправки, например, вывести сообщение на экран
+				});
+		});
+
+		//   возврат и отмена заказа в корзине //////
+
+		function closePage() {
+			// Проверяем, есть ли родительская страница
+			if (window.opener) {
+				// Возвращаемся на родительскую страницу (если она есть)
+				window.opener.location.reload(); // Перезагружаем родительскую страницу (по желанию)
+			}
+			// Закрываем текущее окно
+			window.close();
+		}
 	</script>
+
+	<script src="./js/script.js"></script>
 </body>
 
 </html>

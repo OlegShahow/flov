@@ -56,7 +56,7 @@
 						</div>
 						<p class="delivery">З доставкою по Харкову протягом 1 години</p>
 						<button class="hero__botton">
-							<p><a href="#ord">ЗАМОВИТИ КВІТИ</a></p>
+							<p><a href="#ord">ЗАДАТИ ПИТАННЯ</a></p>
 						</button>
 					</div>
 
@@ -390,15 +390,24 @@
 						<h3>Відправте заявку<br>
 							і Вам зателефонують<br>
 							протягом однієї хвилини</h3>
-						<div class="order--name">
-							<input type="text" id="name" name="firstname" placeholder="Ім’я..">
-						</div>
-						<div class="order--phone">
-							<input type="text" id="telephone" name="telephone" placeholder="Телефон">
-						</div>
-						<button class="order--button">
-							<p>Залишити заявку</p>
-						</button>
+
+						<form id="questionform" action="https://eovtp05m9i42muv.m.pipedream.net" method="POST">
+							<div class="order--name">
+								<input type="text" id="name" name="firstname" placeholder="Ім’я.." required>
+							</div>
+							<div class="order--phone">
+								<input type="tel" id="telephone" name="telephone" placeholder=" Номер Вашого телефону" pattern="\d*"
+									maxlength="13" required>
+								<!-- pattern="\d*": Это регулярное выражение, которое ограничивает ввод только цифрами (где \d означает цифры, а * — любое количество цифр, включая 0). -->
+								 <!-- maxlength="15": Ограничивает количество вводимых символов до 15 -->
+								  <!-- required: Указывает, что поле обязательно для заполнения. -->
+							</div>
+							<div id="error-message" >Будь ласка, заповніть всі поля.</div>
+							<button type="submit" class="order--button">
+								<p>Залишити заявку</p>
+							</button>
+						</form>
+
 					</div>
 
 					<div class="order__box--meneger">

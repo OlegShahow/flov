@@ -1529,7 +1529,7 @@ h6 {
 .order--phone input {
   font-family: "SourceSansPro-Bold";
   font-size: 28px;
-  color: black;
+  color: rgb(0, 0, 0);
   border-radius: 10px;
   padding-left: 1.25rem;
   background-image: url(../icons/person.svg);
@@ -1582,6 +1582,42 @@ h6 {
   .order--name input,
   .order--phone input {
     font-size: calc(10px + 17 * (100vw - 767px) / 1920);
+  }
+}
+@media (min-width: 120rem) {
+  .order--name input::-webkit-input-placeholder, .order--phone input::-webkit-input-placeholder {
+    font-size: 20px;
+  }
+  .order--name input::-moz-placeholder, .order--phone input::-moz-placeholder {
+    font-size: 20px;
+  }
+  .order--name input:-ms-input-placeholder, .order--phone input:-ms-input-placeholder {
+    font-size: 20px;
+  }
+  .order--name input::-ms-input-placeholder, .order--phone input::-ms-input-placeholder {
+    font-size: 20px;
+  }
+  .order--name input::placeholder,
+  .order--phone input::placeholder {
+    font-size: 20px;
+  }
+}
+@media (max-width: 120rem) and (max-width: 1920px) {
+  .order--name input::-webkit-input-placeholder, .order--phone input::-webkit-input-placeholder {
+    font-size: calc(16px + 6.8 * (100vw - 767px) / 1920);
+  }
+  .order--name input::-moz-placeholder, .order--phone input::-moz-placeholder {
+    font-size: calc(16px + 6.8 * (100vw - 767px) / 1920);
+  }
+  .order--name input:-ms-input-placeholder, .order--phone input:-ms-input-placeholder {
+    font-size: calc(16px + 6.8 * (100vw - 767px) / 1920);
+  }
+  .order--name input::-ms-input-placeholder, .order--phone input::-ms-input-placeholder {
+    font-size: calc(16px + 6.8 * (100vw - 767px) / 1920);
+  }
+  .order--name input::placeholder,
+  .order--phone input::placeholder {
+    font-size: calc(16px + 6.8 * (100vw - 767px) / 1920);
   }
 }
 
@@ -1679,6 +1715,20 @@ h6 {
 
 .box--meneger span {
   font-family: "SourceSansPro-Bold";
+}
+
+#name,
+#telephone {
+  font-size: 1.25rem;
+}
+
+#error-message {
+  background-color: red;
+  padding: 0.625rem;
+  color: white;
+  display: none;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .order__box--pupup {
@@ -1970,7 +2020,7 @@ h6 {
 
 .container--box {
   width: 21.875rem;
-  height: 28.125rem;
+  height: 31.25rem;
   padding: 0.625rem;
   background-color: rgba(255, 255, 255, 0.261);
   border: 2px dashed rgb(245, 242, 242);
@@ -2011,4 +2061,12 @@ h6 {
   text-align: center;
   margin-bottom: 1.25rem;
   text-shadow: 2px 2px 3px rgb(172, 255, 47);
+}
+
+.close {
+  margin: 1.875rem 0;
+  padding: 0.625rem;
+  border-radius: 10px;
+  background-color: rgba(186, 9, 56, 0.262745098);
+  color: white;
 }

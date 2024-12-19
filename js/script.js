@@ -152,18 +152,69 @@ dropdownses.forEach((dropdown) => {
 });
 
 
-// ============================================================
+// ==================== отправка обратной связи - окно благодарности ( закрыть окно очистить форму обр. связи)  ========================================
 
 const orderBtn = document.querySelector(".order--button");
 const pupup = document.querySelector(".order__box--pupup");
 const pupupImg = document.querySelector(".order__box--pupup img");
 
+// //  открыть блок благодарности БЕЗ ПРОВЕРКИ НА ЗАПОЛНЕНИЕ ВСЕХ ПОЛЕЙ !!!!
+// orderBtn.addEventListener("click", () => {
+// 	pupup.style.display = "flex";
+// });
+
+
+// открыть блок благодарности  С ПРОВЕРКОЙ НА ЗАПОЛНЕНИЕ ВСЕХ ПОЛЕЙ !!!
+
 orderBtn.addEventListener("click", () => {
-	pupup.style.display = "flex";
+	// Очищаем старое сообщение об ошибке
+	document.getElementById('error-message').style.display = 'none';
+
+	// Проверяем, все ли обязательные поля заполнены
+	const nameField = document.getElementById('name');
+	const phoneField = document.getElementById('telephone');
+
+	// Если хотя бы одно обязательное поле не заполнено, показываем сообщение и отменяем отправку формы
+	if (!nameField.value || !phoneField.value) {
+		document.getElementById('error-message').style.display = 'block';
+		event.preventDefault(); // Останавливаем отправку формы
+	}
+	// если проверка пройдена - отправка формы и показ блока благодарности
+	else { pupup.style.display = "flex"; }
+
+
 });
+
+
+// закрыть блок благодарности
 pupupImg.addEventListener("click", () => {
 	pupup.style.display = "none";
+
+	// Сбрасываем форму обратной связи
+	document.getElementById('questionform').reset();
 })
+
+
+// .......................... проверка заполнения ВСЕХ  полей формы обратной связи СМОТРИ ЭТУ ПРОВЕРКУ ВЫШЕ   ..........................................................................
+
+// document.getElementById('questionform').addEventListener('submit', function (event) {
+// 	// Очищаем старое сообщение об ошибке
+// 	document.getElementById('error-message').style.display = 'none';
+
+// 	// Проверяем, все ли обязательные поля заполнены
+// 	const nameField = document.getElementById('name');
+// 	const phoneField = document.getElementById('telephone');
+
+// 	// Если хотя бы одно обязательное поле не заполнено, показываем сообщение и отменяем отправку формы
+// 	if (!nameField.value || !phoneField.value) {
+
+// 		document.getElementById('error-message').style.display = 'block';
+
+// 		event.preventDefault(); // Останавливаем отправку формы
+// 	}
+// });
+
+
 
 // ==================================================================
 
@@ -312,9 +363,34 @@ document.querySelectorAll('.dropdown-content button').forEach(function (button) 
 // ============================== переход в корзину при клике на корзину  ============================================
 
 document.querySelector('.subcontainer img').addEventListener('click', function () {
-	window.open('/order.html', '_blank');  // Открыть страницу /order в новой вкладке
+	window.open('order.html', '_blank');  // Открыть страницу /order в новой вкладке
 });
 
 document.querySelector('.header__list img').addEventListener('click', function () {
 	window.open('order.html', '_blank');  // Открыть страницу /order в новой вкладке
+});
+
+
+
+// ===================================  отправка заявки обратной связи на сервер    =======================================================
+
+
+document.getElementById('questionform').addEventListener('submit', function (event) {
+	event.preventDefault();  // Предотвращаем стандартную отправку формы
+
+	const formData = new FormData(this); // Получаем данные из формы
+
+	fetch(this.action, {
+		method: this.method,
+		body: formData
+	})
+		.then(response => response.json())  // Преобразуем ответ в JSON, если сервер отправляет JSON
+		.then(data => {
+			console.log('Success:', data);
+			// Здесь можно добавить код для обработки ответа от сервера
+		})
+		.catch(error => {
+			console.error('Error:', error);
+			// Обработка ошибок
+		});
 });
