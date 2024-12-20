@@ -371,6 +371,19 @@ document.querySelector('.header__list img').addEventListener('click', function (
 });
 
 
+//   возврат и отмена заказа в корзине //////
+
+function closePage() {
+	// Проверяем, есть ли родительская страница
+	if (window.opener) {
+		// Возвращаемся на родительскую страницу (если она есть)
+		window.opener.location.href = "index.html"; // Указываем путь к странице заказа
+	}
+	// Закрываем текущее окно
+	window.close();
+}
+
+
 
 // ===================================  отправка заявки обратной связи на сервер    =======================================================
 
@@ -394,3 +407,5 @@ document.getElementById('questionform').addEventListener('submit', function (eve
 			// Обработка ошибок
 		});
 });
+
+
